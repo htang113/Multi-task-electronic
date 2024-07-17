@@ -111,7 +111,10 @@ A small training dataset is in the "data" folder, including starting-point DFT H
 ```
 python3 demo.py
 ```
-In the repository folder. The training takes about 10 minutes on a normal Desktop computer. Running the program gives 
+In the repository folder. The training takes 10~20 minutes on a normal Desktop computer. Running the program writes the loss data into the loss.txt file and output the trained model as "model.pt". Two additional files named "10_model.pt" and "20_model.pt" are saved as checkpoints at the 10 and 20 epoch, respectively.
+
+![image](https://github.com/user-attachments/assets/82eb14a6-efea-4ea7-ae3f-8c5b1d4c32a8)
+
 
 4. Instructions for use
 
