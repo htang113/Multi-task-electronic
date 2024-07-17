@@ -143,7 +143,7 @@ This script run the same training on 4 GPU's in parallel. If your device has a d
 
 3.2 Demo for using our pre-trained model 
 
-The model inference script is shown below:
+Our pre-trained model "EGNN_hydrocarbon_model.pt" is also included in the repository. In order to use the model to calculate new systems, the model inference script is shown below:
 
 ```
 from mtelect import infer
@@ -151,7 +151,7 @@ from mtelect import infer
 device = 'cpu';  # device to run the inference calculation on
 scaling = {'V':0.2, 'T': 0.01};  # scaling factors for the neural network output. 
                                  # should be set the same as in the training script
-data_path = 'data/cyclic_PA_data.json';  # path to the data file of molecule to predict
+data_path = 'data/aromatic_20_PA_data.json';  # path to the data file of molecule to predict
 model_path = 'models/EGNN_hydrocarbon_model.pt';  # path to the pre-trained model
 output_path = 'output/';  # path to save the output files
 
@@ -165,4 +165,4 @@ infer(params);
 ```
 
 4. Instructions for use
-Our pre-trained model "EGNN_hydrocarbon_model.pt" is also included in the repository. In order to use the model to calculate new systems, 
+
