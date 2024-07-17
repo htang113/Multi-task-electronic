@@ -111,10 +111,11 @@ A small training dataset is in the "data" folder, including starting-point DFT H
 ```
 python3 demo.py
 ```
-In the repository folder. The training takes 10~20 minutes on a normal Desktop computer. Running the program writes the loss data into the loss.txt file and output the trained model as "model.pt". Two additional files named "10_model.pt" and "20_model.pt" are saved as checkpoints at the 10 and 20 epoch, respectively.
+In the repository folder. The training takes 10~20 minutes on a normal Desktop computer. Running the program writes the loss data into the loss.txt file and output the trained model as "model.pt". Two additional files named "10_model.pt" and "20_model.pt" are saved as checkpoints at the 10 and 20 epoch, respectively. The loss data looks as below, including the mean square error loss of all trained quantities (V: the $\parallel V_\theta\parallel^2$ regularization, E: energy, x/y/z:different components of electric dipole moments, xx/yy/zz/xy/yz/xz: different components of electric quadrupole moments, atomic_charge: Mulliken atomic charge, bond_order: Mayer bond order, alpha: static electric polarizability)
 
-![image](https://github.com/user-attachments/assets/82eb14a6-efea-4ea7-ae3f-8c5b1d4c32a8)
+![image](https://github.com/user-attachments/assets/5570cdf5-5e0e-4249-9e1e-78ec303cca98)
 
+Depending on the random seed, specific numbers can be different, but the decreasing trend of the training loss is expected in all cases.
 
 4. Instructions for use
 
