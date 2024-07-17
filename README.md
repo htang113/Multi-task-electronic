@@ -22,11 +22,11 @@ Note that in most cases, different version of packages should also work. We list
 2. Installation
 
 No installation process is needed before running the calculation. After downloading the whole repository, calculations can be run in the folder. 
-For example, one can launch the model training process using "python3 train_serial.py" in the terminal for Linux devices. 
+For example, one can launch the model training process using "python3 demo.py" in the terminal for Linux devices. 
 
 3. Demo
 
-
+We include a demo for training the EGNN model "demo.py". A small training dataset is in the "data" folder, including 
 
 4. Instructions for use
 
