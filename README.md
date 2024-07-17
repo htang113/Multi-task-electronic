@@ -49,12 +49,12 @@ OPS = {'V':0.1,'E':1,
 
 device = 'cuda:0';
 steps_per_epoch = 10;
-N_epoch = 101;
+N_epoch = 21;
 lr_init = 1E-2;
 lr_final = 1E-3;
 lr_decay_steps = 50;
 scaling = {'V':0.2, 'T': 0.01, 'G':0.1};
-Nsave = 50;
+Nsave = 10;
 batch_size = 1;
 path = '../../v6/data/demo/';
 
@@ -107,7 +107,11 @@ for i in range(N_epoch):
         train1.save(str(i)+'_model.pt');
         print('saved model at epoch '+str(i));
 ```
-A small training dataset is in the "data" folder, including starting-point DFT Hamiltonian and CCSD(T) labels of 23 molecules at equilibrium configuration. 
+A small training dataset is in the "data" folder, including starting-point DFT Hamiltonian and CCSD(T) labels of 23 molecules at equilibrium configuration. The above script can be launched by simply typing 
+```
+python3 demo.py
+```
+In the repository folder. The training takes about 10 minutes on a normal Desktop computer. Running the program gives 
 
 4. Instructions for use
 
