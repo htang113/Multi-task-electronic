@@ -51,7 +51,25 @@ class trainer():
                                  labels[i]['S']);
                 mati.append(S[:,None,:,:]);
             self.charge_matrices.append(torch.hstack(mati));
-            
+
+    def load(self, filename):
+        
+        try:
+            self.model.load_state_dict(torch.load(filename));
+        except:
+            try:
+                res = torch.load(filename);
+                for key in list(res.keys()):
+                    res[key[7:]] = res[key];
+                    del res[key];
+                self.model.load_state_dict(res);
+            except:
+                res = torch.load(filename);
+                for key in list(res.keys()):
+                    res['module.'+key] = res[key];
+                    del res[key];
+                self.model.load_state_dict(res);
+
     def train(self, steps=10, batch_size = 50,
                     op_names=[]) -> float:
 
@@ -95,7 +113,6 @@ class trainer():
                 V_raw = self.model(minibatch);
 
                 V, T, G = self.transformer.raw_to_mat(V_raw,minibatch,labels);
-
                 V *= self.scaling['V'];
                 T *= self.scaling['T'];
                 
@@ -146,11 +163,11 @@ class trainer():
                         r_mats = torch.stack([self.op_matrices[i_m]['x'],
                                                 self.op_matrices[i_m]['y'],
                                                 self.op_matrices[i_m]['z']]);
-                        Lalpha_grad, Lalpha_out = loss_calculator.polar_loss(alpha, r_mats, T);
+                        Lalpha_grad, Lalpha_out = loss_calculator.polar_loss(alpha, r_mats, T, G);
 
                         L_grads[op_name] = Lalpha_grad;
                         L_ave[i] += Lalpha_out;
-
+                        
                     else:
                         
                         O = labels[op_name]
