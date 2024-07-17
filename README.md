@@ -82,7 +82,7 @@ In the repository folder. The training takes 10~20 minutes on a normal Desktop c
 
 Depending on the random seed, specific numbers can be different, but the decreasing trend of the training loss is expected in all cases.
 
-The training can also be implemented on multiple GPU's in parallel using the distributed data parallel (DDP) scheme. The DDP version of the training script is shown below:
+The training can also be implemented on multiple GPU's in parallel using the distributed data parallel (DDP) scheme in "demo/demo_parallel.py". The DDP version of the training script is shown below:
 ```
 from mtelect import train_model
 import torch.distributed as dist
@@ -139,7 +139,7 @@ if __name__=="__main__":
         nprocs=world_size,
         join=True)   # spawn 4 processes for parallel training on 4 GPUs
 ```
-This script run the same training on 4 GPU's in parallel. If your device has a different number of GPUs, change "world_size" accordingly. Note that in the current version, molecules trained on each process must be manually separated by setting "molecule_list", and each process contains the same number of data files. Each process will output a loss file (loss_0,1,2,3.txt) including the MAE loss for data within the process.
+This script run the same training on 4 GPU's in parallel. If your device has a different number of GPUs, change "world_size" accordingly. Note that in the current version, molecules trained on each process must be manually separated by setting "molecule_list", and each process contains the same number of data files. Each process will output a loss file (loss_0,1,2,3.txt) including the MAE loss for data within the process. The total loss is then the averate of values in the four files.
 
 3.2 Demo for using our pre-trained model 
 
