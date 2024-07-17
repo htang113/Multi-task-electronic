@@ -28,7 +28,7 @@ For example, one can launch the model training process using "python3 demo.py" i
 
 We include two demo scripts demo/demo_train.py and demo/demo_inference.py for training the EGNN model and using our pre-trained model to calculate molecular properties. 
 
-3.1 Demo for training
+3.1 Demo for training a model
 
 The training script is shown below:
 ```
@@ -78,7 +78,28 @@ In the repository folder. The training takes 10~20 minutes on a normal Desktop c
 
 Depending on the random seed, specific numbers can be different, but the decreasing trend of the training loss is expected in all cases.
 
-3.1 Demo for using our pre-trained model
+3.2 Demo for using our pre-trained model 
+
+The model inference script is shown below:
+
+```
+from mtelect import infer
+
+device = 'cpu';  # device to run the inference calculation on
+scaling = {'V':0.2, 'T': 0.01};  # scaling factors for the neural network output. 
+                                 # should be set the same as in the training script
+data_path = 'data/cyclic_PA_data.json';  # path to the data file of molecule to predict
+model_path = 'models/EGNN_hydrocarbon_model.pt';  # path to the pre-trained model
+output_path = 'output/';  # path to save the output files
+
+OPS = ['E','x', 'y', 'z', 'xx', 'yy', 'zz', 'xy', 'yz', 'xz',
+       'atomic_charge', 'E_gap', 'bond_order', 'alpha'];      # list of operators to predict
+
+params = {'device':device, 'scaling':scaling, 'data_path':data_path,
+          'model_path':model_path, 'OPS':OPS, 'output_path':output_path};
+
+infer(params);
+```
 
 4. Instructions for use
 Our pre-trained model "EGNN_hydrocarbon_model.pt" is also included in the repository. In order to use the model to calculate new systems, 
