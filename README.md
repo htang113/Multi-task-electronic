@@ -26,11 +26,11 @@ For example, one can launch the model training process using "python3 demo.py" i
 
 3. Demo
 
-We include two demo scripts demo/demo_train.py and demo/demo_inference.py for training the EGNN model and using our pre-trained model to calculate molecular properties. 
+We include 3 demo scripts in demo/ for training the EGNN model and using our pre-trained model to calculate molecular properties. 
 
 3.1 Demo for training a model
 
-The training script is shown below:
+The training demo/demo_train.py script is shown below:
 ```
 from mtelect import train_model
 
@@ -70,9 +70,9 @@ A small training dataset is in the "data" folder, including starting-point DFT H
 cd demo
 cp demo_train.py ../
 cd ../
-python3 demo.py
+python3 demo_train.py
 ```
-In the repository folder. The training takes 10~20 minutes on a normal Desktop computer. Running the program writes the loss data into the loss.txt file and output the trained model as "model.pt". Two additional files named "10_model.pt" and "20_model.pt" are saved as checkpoints at the 10 and 20 epoch, respectively. The loss data looks as below, including the mean square error loss of all trained quantities (V: the $\parallel V_\theta\parallel^2$ regularization, E: energy, x/y/z:different components of electric dipole moments, xx/yy/zz/xy/yz/xz: different components of electric quadrupole moments, atomic_charge: Mulliken atomic charge, bond_order: Mayer bond order, alpha: static electric polarizability)
+In the repository folder. The training takes 10~20 minutes on a normal Desktop computer. Running the program writes the loss data into the loss_0.txt file and output the trained model as "model.pt". Two additional files named "10_model.pt" and "20_model.pt" are saved as checkpoints at the 10 and 20 epoch, respectively. The loss data looks as below, including the mean square error loss of all trained quantities (V: the $\parallel V_\theta\parallel^2$ regularization, E: energy, x/y/z:different components of electric dipole moments, xx/yy/zz/xy/yz/xz: different components of electric quadrupole moments, atomic_charge: Mulliken atomic charge, bond_order: Mayer bond order, alpha: static electric polarizability)
 
 ![image](https://github.com/user-attachments/assets/5570cdf5-5e0e-4249-9e1e-78ec303cca98)
 
@@ -135,7 +135,7 @@ if __name__=="__main__":
         nprocs=world_size,
         join=True)   # spawn 4 processes for parallel training on 4 GPUs
 ```
-This script run the same training on 4 GPU's in parallel. If your device has a different number of GPUs, change "world_size" accordingly. Note that in the current version, molecules trained on each process must be manually separated by setting "molecule_list", and each process contains the same number of data files.
+This script run the same training on 4 GPU's in parallel. If your device has a different number of GPUs, change "world_size" accordingly. Note that in the current version, molecules trained on each process must be manually separated by setting "molecule_list", and each process contains the same number of data files. Each process will output a loss file (loss_0,1,2,3.txt) including the MAE loss for data within the process.
 
 3.2 Demo for using our pre-trained model 
 
