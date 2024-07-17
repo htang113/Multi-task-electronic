@@ -23,8 +23,8 @@ N_epoch = 101;         # number of epochs to train for
 lr_init = 1E-2;        # initial learning rate
 lr_final = 1E-3;       # final learning rate
 lr_decay_steps = 5;    # number of epochs to decay the learning rate  
-scaling = {'V':0.2, 'T': 0.01, 'G':0.1};   # scaling factors for the neural network output
-                                           # for V_theta, screening matrix T, and bandgap corrector G
+scaling = {'V':0.2, 'T': 0.01};   # scaling factors for the neural network output
+                                  # for V_theta and screening matrix T
 Nsave = 50;      # number of epochs between saving the model
 batch_size = 1;  # number of configurations from each chemical formula for training
 path = 'data/';  # path to training data
