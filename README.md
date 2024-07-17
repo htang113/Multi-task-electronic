@@ -111,4 +111,4 @@ In the repository folder. The training takes 10~20 minutes on a normal Desktop c
 Depending on the random seed, specific numbers can be different, but the decreasing trend of the training loss is expected in all cases.
 
 4. Instructions for use
-
+Our pre-trained model "EGNN_hydrocarbon_model.pt" is also included in the repository. In order to use the model to calculate new systems, 
