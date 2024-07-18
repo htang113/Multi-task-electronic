@@ -10,7 +10,7 @@ from mtelect import infer
 device = 'cpu';  # device to run the inference calculation on
 scaling = {'V':0.2, 'T': 0.01};  # scaling factors for the neural network output. 
                                  # should be set the same as in the training script
-data_path = 'data/cyclic_PA_data.json';  # path to the data file of molecule to predict
+data_path = 'data/aromatic_20_data.json';  # path to the data file of molecule to predict
 model_path = 'models/EGNN_hydrocarbon_model.pt';  # path to the pre-trained model
 output_path = 'output/';  # path to save the output files
 
