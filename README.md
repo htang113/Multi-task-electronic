@@ -231,6 +231,7 @@ data["alpha"]["alpha_hat"][0]  # static electric polarizability in atomic unit (
 4. Instructions for use
 
 4.1 model training with large dataset
+
 In our paper, the model is trained on a much larger training dataset than the demo case. The dataset includes about 5 times more molecules and about 500 times more configurations. Each molecule has about 100 vibrational configurations, so that the model can capture electronic interaction when the system deviates from equilibrium configurations. However, as the filesize exceeds the limit of a Github repository, we cannot put the whole training dataset here. The dataset is available upon reasonable request to authors of the paper (haot@mit.edu, haoweixu@mit.edu, liju@mit.edu).
 
 The large training set contains about 500 atomic configurations for each chemical formula. For example, both CH4_data.json and CH4_obs_mat.json includes 500 different frames. In the demo dataset, data[key] is a list containing only one element; in the full dataset, data[key] is a list containing 500 element, each for one configuration. To conduct such training, consider setting a larger batch_size and N_epoch, for example:
@@ -243,5 +244,9 @@ The training will take about one day with 4 high-performance GPUs working in par
 Users can also create their own dataset for training. We provide data processing script ""script/generate.py" to generate a batch of DFT and CCSD(T) calculations using quantum chemistry software ORCA https://www.orcasoftware.de/tutorials_orca/.  "script/read.py" is used to read the DFT and CCSD(T) calculation results and output the "xxx_data.json" files. "script/generate_obs_mat.py" is then used to generate the "xxx_obs_mat.json" files. Puting all these files into the data/ folder enables training on customized dataset.
 
 This version of the code does not support systems with elements other than carbon and hydrogen yet, but a new version will be available soon that support arbitrary elements defined by user inputs.
+
+4.2 Applying pre-trained model to user-defined system: orca interface
+
+4.3 Applying pre-trained model to user-defined system: PySCF interface
 
 
