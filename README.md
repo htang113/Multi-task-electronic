@@ -21,8 +21,31 @@ Note that in most cases, different version of packages should also work. We list
 
 2. Installation
 
-No installation process is needed before running the calculation. After downloading the whole repository, calculations can be run in the folder. 
-For example, one can launch the model training process using "python3 demo.py" in the terminal for Linux devices. 
+First, create a python virtual environment:
+```
+python3 -m venv ~/venv/MTElect
+source ~/venv/MTElect/bin/activate
+```
+Then install dependent packages:
+```
+pip install numpy
+pip install scipy
+pip install matplotlib
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install torch-cluster -f https://data.pyg.org/whl/torch-2.1.0+cu121.html
+pip install torch-scatter -f https://data.pyg.org/whl/torch-2.1.0+cu121.html
+pip install --upgrade e3nn
+pip install sympy
+```
+After installing the dependent repositories, download this code package:
+```
+git clone https://github.com/htang113/Multi-task-electronic
+```
+Finally enter the working folder and install the package:
+```
+cd Multi-task-electronic
+pip install .
+```
 
 3. Demo
 
