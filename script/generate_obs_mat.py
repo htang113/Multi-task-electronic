@@ -9,13 +9,13 @@ import json;
 from pkgs.dataframe import load_data;
 from pkgs.integral import integrate;
 
-for task in range(20):
-    molecule_list = ['methane','ethane','ethylene','2m2b',
-                     'acetylene','propane','propylene','propyne',
-                     'cyclopropane','cyclobutane','butane','benzene',
-                     'isobutane','isobutylene','neopentane','cyclopentane',
-                     '12butadiene','13butadiene','1butyne','2butyne'];
-    
+for task in range(23):
+
+    molecule_list = ['CH4','C2H2','C2H4','C2H6','C3H4',
+                 'C3H6','C3H8','C4H6','C4H8','C4H10',
+                 'C5H8','C5H10','C5H12','C6H6','C6H8',
+                 'C6H12','C6H14','C7H8','C7H10','C8H8'];
+    molecule_list += ['C7H14', 'C8H14', 'C10H10'];
     OPS = ['x', 'y', 'z', 'xx', 'yy', 'zz', 'xy', 'yz', 'xz'];
     device = 'cuda:0';
     molecule_list = [molecule_list[task]];
