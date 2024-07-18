@@ -99,7 +99,7 @@ cp demo_train.py ../
 cd ../
 python3 demo_train.py
 ```
-In the repository folder. The training takes 10~20 minutes on a normal Desktop computer. Running the program writes the loss data into the loss_0.txt file and output the trained model as "model.pt". Two additional files named "10_model.pt" and "20_model.pt" are saved as checkpoints at the 10 and 20 epoch, respectively. The loss data looks as below, including the mean square error loss of all trained quantities (V: the $\parallel V_\theta\parallel^2$ regularization, E: energy, x/y/z:different components of electric dipole moments, xx/yy/zz/xy/yz/xz: different components of electric quadrupole moments, atomic_charge: Mulliken atomic charge, bond_order: Mayer bond order, alpha: static electric polarizability)
+In the repository folder. The training takes 15~20 minutes on a normal Desktop computer. Running the program writes the loss data into the loss_0.txt file and output the trained model as "model.pt". Two additional files named "10_model.pt" and "20_model.pt" are saved as checkpoints at the 10 and 20 epoch, respectively. The loss data looks as below, including the mean square error loss of all trained quantities (V: the $\parallel V_\theta\parallel^2$ regularization, E: energy, x/y/z:different components of electric dipole moments, xx/yy/zz/xy/yz/xz: different components of electric quadrupole moments, atomic_charge: Mulliken atomic charge, bond_order: Mayer bond order, alpha: static electric polarizability)
 
 ![image](https://github.com/user-attachments/assets/5570cdf5-5e0e-4249-9e1e-78ec303cca98)
 
@@ -162,7 +162,7 @@ if __name__=="__main__":
         nprocs=world_size,
         join=True)   # spawn 4 processes for parallel training on 4 GPUs
 ```
-This script run the same training on 4 GPU's in parallel. If your device has a different number of GPUs, change "world_size" accordingly. Note that in the current version, molecules trained on each process must be manually separated by setting "molecule_list", and each process contains the same number of data files. Each process will output a loss file (loss_0,1,2,3.txt) including the MAE loss for data within the process. The total loss is then the averate of values in the four files.
+This script run the same training on 4 GPU's in parallel. This calculation takes about 5 min on the NERSC perlmutter GPU node with 4 Nvidia A100 40 GB GPUs https://docs.nersc.gov/systems/perlmutter/architecture/. If your device has a different number of GPUs, change "world_size" accordingly. Note that in the current version, molecules trained on each process must be manually separated by setting "molecule_list", and each process contains the same number of data files. Each process will output a loss file (loss_0,1,2,3.txt) including the MAE loss for data within the process. The total loss is then the averate of values in the four files.
 
 3.2 Demo for using our pre-trained model 
 
@@ -185,6 +185,47 @@ params = {'device':device, 'scaling':scaling, 'data_path':data_path,
           'model_path':model_path, 'OPS':OPS, 'output_path':output_path};
 
 infer(params);
+```
+Running the inference script by:
+```
+cd demo
+cp demo_inference.py ../
+cd ../
+python3 demo_inference.py
+```
+The script reads the molecule data from data/aromatic_20_PA_data.json, which includes the information of the molecule indexed as number 20 in https://pubs.acs.org/doi/10.1021/cr990324%2B. Data files of molecules with index number 19,21,22,23 in the same paper and cyclic polyacetylene ("data/cyclic_PA_data.json") C$_{66}$H$_{66}$ are also included in the demo dataset for users to try. Running the script generates a folder "output/" and write two files "20.json" including all predicted properties and "20_H.json" including the corrected effective Hamiltonian by our EGNN. The predicted properties can be readout by simply loading the json file:
+```
+import json;
+
+filename = '20.json'
+with open(filename,'r') as file:
+    data = json.load(file);
+
+data["C"]  # number of carbon atoms
+data["H"]  # number of hydrogen atoms
+data["E"]["Ehat"][0] # energy of the molecule in Hartree
+
+# electric dipole moment vector reference to the molecule mass center in atomic unit
+data["x"]["Ohat"][0]  # px
+data["y"]["Ohat"][0]  # py
+data["z"]["Ohat"][0]  # pz
+
+# electric quadrupole moment tensor reference to the molecule mass center in atomic unit
+data["xx"]["Ohat"][0]  # Qxx
+data["yy"]["Ohat"][0]  # Qyy
+data["zz"]["Ohat"][0]  # Qzz
+data["xy"]["Ohat"][0]  # Qxy
+data["xz"]["Ohat"][0]  # Qxz
+data["yz"]["Ohat"][0]  # Qyz
+
+# list of Mulliken atomic charges in atomic unit (length = number of atoms)
+data["atomic_charge"]["Chat"][0]  # charge of the atom
+# 2D nested list of Mayer bond orders (number of atoms x number of atoms)
+data["bond_order"]["Bhat"][0]  # bond order between atom i and atom j
+
+data["E_gap"]["Eg_hat"][0]  # optical gap in Hartree
+data["alpha"]["alpha_hat"][0]  # static electric polarizability in atomic unit (3x3 nested list)
+
 ```
 
 4. Instructions for use
