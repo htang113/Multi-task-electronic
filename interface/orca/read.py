@@ -16,5 +16,5 @@ for key in matrix_dic:
     output[key] = [matrix_dic[key]];
 output['name'] = [system];
 
-with open(path + system + '_data.json','w') as file:
+with open(system + '_data.json','w') as file:
     json.dump(output, file);
