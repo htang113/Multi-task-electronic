@@ -13,3 +13,4 @@ from mtelect.train import trainer
 from mtelect.train import trainer_ddp
 from mtelect.predict_func import infer
 from mtelect.train_func import train_model
+from mtelect.read_orca import QM_reader
