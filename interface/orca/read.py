@@ -1,10 +1,9 @@
-import numpy as np;
-import os;
 import json;
-import scipy;
+from mtelect import QM_reader;
 
-path = 'orca_folder/';
-system = 'system';
+path = 'orca_folder/';   # Path of ORCA calculation results
+system = 'system';  # Name of the system. Used just in labeling outputs.
+
 reader = QM_reader(path);     
 ne = reader.read_ne('');
 HF_dic = reader.read_HF('');
