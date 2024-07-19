@@ -256,8 +256,28 @@ cd interface/orca/orca_folder
 ```
 The calculation outputs information to the file "log". Then, run the script "interface/orca/read.py":
 ```
+import json;
+from mtelect import QM_reader;
+
+path = 'orca_folder/';   # Path of ORCA calculation results
+system = 'system';  # Name of the system. Used just in labeling outputs.
+
+reader = QM_reader(path);     
+ne = reader.read_ne('');
+HF_dic = reader.read_HF('');
+matrix_dic = reader.read_matrix('');
+
+output = {};
+for key in HF_dic:
+    output[key] = [HF_dic[key]];
+for key in matrix_dic:
+    output[key] = [matrix_dic[key]];
+output['name'] = [system];
+
+with open(path + system + '_data.json','w') as file:
+    json.dump(output, file);
 ```
-The script is launched by 
+Consider reset system into a name that identify the molecule you want to calculate. The script is launched by 
 ```
 cd ../
 python3 read.py
