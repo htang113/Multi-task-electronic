@@ -247,6 +247,30 @@ This version of the code does not support systems with elements other than carbo
 
 4.2 Applying pre-trained model to user-defined system: orca interface
 
+In order to apply a pre-trained EGNN model to a user-defined molecule other than the molecules in our demo data files, user needs to generate the input data file for the EGNN model. This can be realized in two ways. Here we describe the first way, using software ORCA to generate the input. Alternatively, one can use PySCF to generate the input, which will be described in the next section. The advantage of using ORCA to generate input is that  ORCA is a pre-compiled package, so it is fast when calculating large system compared with PySCF. 
+
+Users first need to run a ORCA DFT calculation using the fast-to-evaluate functional BP86 with a medium-sized cc-pVDZ basis set. This calculation is fast for systems up to hundreds of atoms. An example ORCA calculation is shown in "interface/orca/orca_folder/". Atomic structure is defined in the ORCA input script "run.inp", which also contained other DFT parameters (please keep these parameters unchanged. Just replace the configuration into the one you want to calculate). After ORCA is installed, one can launch the ORCA calculation by:
+```
+cd interface/orca/orca_folder
+/path/to/orca/orca run.inp >log
+```
+The calculation outputs information to the file "log". Then, run the script "interface/orca/read.py":
+```
+```
+The script is launched by 
+```
+cd ../
+python3 read.py
+```
+An output data file "interface/orca/system_data.json" will then be generated. Moving the data file to the data folder:
+```
+mv system_data.json ../../data/
+```
+Then you can use the demo_inference.py script to calculate your system by just replace the data_path line by 
+```
+data_path = 'data/system_data.json'
+```
+
 4.3 Applying pre-trained model to user-defined system: PySCF interface
 
 
