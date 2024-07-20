@@ -6,7 +6,7 @@ authors = [
 ]
 description = "Code package for multi-task machine learning for molecular electronic structure"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache License",
