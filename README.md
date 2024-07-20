@@ -37,7 +37,7 @@ pip install torch-scatter -f https://data.pyg.org/whl/torch-2.1.0+cu121.html
 pip install --upgrade e3nn
 pip install sympy
 ```
-After installing the dependent repositories, download this code package:
+After installing the dependent packages, download this code package:
 ```
 git clone https://github.com/htang113/Multi-task-electronic
 ```
