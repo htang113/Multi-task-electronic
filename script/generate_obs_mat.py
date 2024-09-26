@@ -6,8 +6,10 @@ Created on Tue Dec 12 15:00:20 2023
 """
 
 import json;
-from pkgs.dataframe import load_data;
-from pkgs.integral import integrate;
+from data import load_data;
+from basis import integrate;
+
+starting_basis = 'cc-pVDZ';
 
 for task in range(23):
 
@@ -22,7 +24,7 @@ for task in range(23):
     
     data, labels, obs_mat = load_data(molecule_list, device, load_obs_mat=False, 
                              ind_list=[], op_names=OPS);
-    integrator = integrate(device);
+    integrator = integrate(device, starting_basis=starting_basis);
     
     pos = data[0]['pos'];
     atm = data[0]['elements'];
