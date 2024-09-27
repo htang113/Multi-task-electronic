@@ -74,7 +74,7 @@ params['OPS'] = {'V':0.01,'E':1,
     'xx':0.01, 'yy':0.01, 'zz':0.01,
     'xy':0.01, 'yz':0.01, 'xz':0.01,
     'atomic_charge': 0.01, 'E_gap':0.2,
-    'bond_order':0.02, 'alpha':3E-5, 'F':0.1};
+    'bond_order':0.02, 'alpha':3E-5};
 params['device'] = 'cuda:0';             # device to run the code for serial training. 
                                          # set as 'cpu' for cpu training and 'cuda:0' for gpu training
 params['batch_size'] = 20;              # batch size for training
@@ -164,7 +164,7 @@ params['OPS'] = {'E':1,
     'xx':0.01, 'yy':0.01, 'zz':0.01,
     'xy':0.01, 'yz':0.01, 'xz':0.01,
     'atomic_charge': 0.01, 'E_gap':0.2,
-    'bond_order':0.02, 'alpha':3E-5, 'F':0.1};
+    'bond_order':0.02, 'alpha':3E-5};
 params['device'] = 'cuda:0';  # device to run the code for calculations in the testing. 
                               # set as 'cpu' for cpu testing and 'cuda:0' for gpu testing
 params['batch_size'] = 5;    # batch size for testing
@@ -263,7 +263,6 @@ data["bond_order"][i]  # bond order Bij between atom i and atom j as a 3-element
 
 data["E_gap"][i]  # optical gap in eV
 data["alpha"][i]  # static electric polarizability in atomic unit (3x3 nested list)
-data["F"][i]      # Forces on nuclei in atomic unit (3xN nested list)
 ```
 Note that the local DFT starting point from ORCA is already provided in this demo. If the user want to use the ORCA interface to study new molecules, it is necessary to implement ORCA DFT calculations and prepare the data file in the same format as "dataset/group_infer/basic/". Detailed instructions on how to prepare the data is elaborated in section 4.2.
 
