@@ -39,7 +39,7 @@ pip install sympy
 ```
 After installing the dependent packages, download this code package:
 ```
-git clone https://github.com/htang113/Multi-task-electronic
+git clone -b v1.6 --single-branch https://github.com/htang113/Multi-task-electronic/
 ```
 Finally enter the working folder and install the package:
 ```
