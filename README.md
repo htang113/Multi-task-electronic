@@ -43,7 +43,7 @@ pip install --prefer-binary pyscf
 ```
 After installing the dependent packages, download this code package:
 ```
-git clone https://github.com/htang113/ML_electronic/
+git clone -b v2.0 --single-branch https://github.com/htang113/Multi-task-electronic/
 ```
 Finally enter the working folder and install the package:
 ```
